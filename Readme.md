@@ -2,6 +2,9 @@
 
 Run a custom command in vim with current buffer and see the result side-by-side
 
+## TODO
+* syntax support for runresult
+
 ## Usage
 
 Config the command by filetype:
