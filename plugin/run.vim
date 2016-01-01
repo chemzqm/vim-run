@@ -67,11 +67,18 @@ function! s:Execute(command, ...)
   silent normal! ggdG
   setl filetype=runresult readonly bufhidden=wipe
   setl buftype=nofile
-  silent! call append(0, split(output, '\v\n'))
+  let list = split(output, '\v\n')
+  if len(list)
+    let list = split(output, "\n")
+    call setline(1, list[0])
+    call append(1, list[1:])
+  endif
   silent! execute '%s///'
-  silent execute ':$d'
+  silent execute '$d'
   execute 'wincmd p'
-  silent! redraw
+  if !has('gui_running')
+    redraw
+  endif
   echo 'done'
 endfunction
 
