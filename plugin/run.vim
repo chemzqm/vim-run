@@ -15,9 +15,9 @@ let did_vim_run_loaded = 1
 function! s:GetCommand(...)
   if a:0 && len(a:1)
     let cmd = a:1
-    let b:run_cmd = cmd
-  elseif exists('b:run_cmd')
-    let cmd = b:run_cmd
+    let b:vim_run_cmd = cmd
+  elseif exists('b:vim_run_cmd')
+    let cmd = b:vim_run_cmd
   elseif exists('g:vim_run_command_map')
     let cmd = get(g:vim_run_command_map, &ft, '')
   elseif executable(&ft)
@@ -61,11 +61,11 @@ function! s:Execute(command, ...)
   if exists('wnr')
     execute wnr . 'wincmd w'
     silent execute 'file __run__' . matchstr(cmd, '\v^\S+')
+    silent normal! ggdG
   else
-    silent execute 'belowright vsplit __run__' . matchstr(cmd, '\v^\S+')
+    silent execute 'keepalt belowright vsplit __run__' . matchstr(cmd, '\v^\S+')
+    setl filetype=runresult buftype=nofile bufhidden=wipe
   endif
-  setl filetype=runresult buftype=nofile bufhidden=wipe
-  silent normal! ggdG
   let list = split(output, '\v\n')
   if len(list)
     let list = split(output, "\n")
@@ -82,7 +82,7 @@ endfunction
 let s:auto_run_dict = {}
 function! s:Autorun(...)
   if a:0 && len(a:1)
-    let b:run_cmd = a:1
+    let b:vim_run_cmd = a:1
   endif
   let file = fnamemodify(bufname('%'), ':p')
   if get(s:auto_run_dict, file, 0)
