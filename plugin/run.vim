@@ -62,11 +62,10 @@ function! s:Execute(command, ...)
     execute wnr . 'wincmd w'
     silent execute 'file __run__' . matchstr(cmd, '\v^\S+')
   else
-    execute 'belowright vsplit __run__' . matchstr(cmd, '\v^\S+')
+    silent execute 'belowright vsplit __run__' . matchstr(cmd, '\v^\S+')
   endif
+  setl filetype=runresult buftype=nofile bufhidden=wipe
   silent normal! ggdG
-  setl filetype=runresult readonly bufhidden=wipe
-  setl buftype=nofile
   let list = split(output, '\v\n')
   if len(list)
     let list = split(output, "\n")
@@ -74,12 +73,10 @@ function! s:Execute(command, ...)
     call append(1, list[1:])
   endif
   silent! execute '%s///'
-  silent execute '$d'
   execute 'wincmd p'
   if !has('gui_running')
     redraw
   endif
-  echo 'done'
 endfunction
 
 let s:auto_run_dict = {}
