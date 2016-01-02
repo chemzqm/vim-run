@@ -1,0 +1,114 @@
+*vim-run.txt*	Run command with current buffer and get result side by side
+
+                 ,--.                                       ~
+        ,--. ,--.`--',--,--,--.       ,--.--.,--.,--.,--,--, ~
+        \  `'  / ,--.|        |,-----.|  .--'|  ||  ||      \~
+         \    /  |  ||  |  |  |'-----'|  |   '  ''  '|  ||  |~
+          `--'   `--'`--`--`--'       `--'    `----' `--''--'~
+
+Author  : Qiming Zhao <chemzqm@gmail.com>
+Version : 0.1.0
+License : MIT license {{{
+
+  Copyright (c) 2016 chemzqm@gmail.com
+
+  Permission is hereby granted, free of charge, to any person obtaining
+  a copy of this software and associated documentation files (the
+  "Software"), to deal in the Software without restriction, including
+  without limitation the rights to use, copy, modify, merge, publish,
+  distribute, sublicense, and/or sell copies of the Software, and to
+  permit persons to whom the Software is furnished to do so, subject to
+  the following conditions:
+  The above copyright notice and this permission notice shall be
+  included in all copies or substantial portions of the Software.
+
+  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+  EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+  MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+  IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
+  CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+  TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
+  SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+}}}
+
+==============================================================================
+CONTENTS				*vim-run-contents*
+
+INTRODUCTION		|vim-run-introduction|
+INSTALLATION		|vim-run-installation|
+INTERFACE		|vim-run-interface|
+  COMMANDS			|vim-run-commands|
+  VARIABLES			|vim-run-variables|
+CHANGELOG		|vim-run-changelog|
+
+==============================================================================
+INTRODUCTION				*vim-run-introduction*
+
+vim-run let you run command with current buffer or section of buffer and get
+retult shown side by side, your can also make the the file auto run when
+saved.
+
+
+==============================================================================
+INSTALLATION				*vim-run-installation*
+
+Install with your favorite plugin managers like NeoBundle/Plugin/Plug
+>
+	NeoBundle 'chemzqm/vim-run'
+	Plugin 'chemzqm/vim-run'
+	Plug 'chemzqm/vim-run'
+
+==============================================================================
+INTERFACE				*vim-run-interface*
+
+------------------------------------------------------------------------------
+COMMANDS 				*vim-run-commands*
+
+:Run [{command}]				*:Run*
+
+	Run current buffer with {command}, {command} is buffer type by default
+	{command} could also be configured by global config variables, see
+	|vim-run-variables|
+
+:[range]Run [{command}]				*:range-Run*
+
+	Run selected range of lines through command, {command} is the same
+	as |:Run|. Range support line range, for example: >
+
+	:20,30Run
+<
+	will run lines from 20 to 30 through the {command}
+
+	Visual selected range is also supported, for example: >
+
+	:'<,'>Run
+<
+	will run visual selected lines through the {command}
+
+:AutoRun [{command}]				*:auto-run*
+
+	Toggle autorun config for the current buffer, if it's on, {command}
+	or last used {command} by |:Run| would be used as command to run the
+	file automatially on file save.
+
+
+------------------------------------------------------------------------------
+*VARIABLES*				*vim-run-variables*
+>
+The *g:vim_run_command_map* variable controls the default command to run of a
+certain filetype.
+>
+  let g:vim_run_command_map = {
+    \'javascript': 'node',
+    \}
+
+==============================================================================
+CHANGELOG				 *vim-run-changelog*
+
+0.1.0	2016-1-3
+	- init.
+
+==============================================================================
+
+vim:tw=78:ts=8:sts=8:ft=help:noet:fen:fdm=marker:
