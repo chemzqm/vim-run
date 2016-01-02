@@ -1,9 +1,10 @@
 # Vim-run
 
-Run a custom command in vim with current buffer and see the result side-by-side
+[![](http://img.shields.io/github/issues/chemzqm/vim-run)](https://github.com/chemzqm/vim-run/issues)
+[![](http://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+[![](https://img.shields.io/badge/doc-%3Ah%20vim-run.txt-red.svg)](doc/vim-run.txt)
 
-## TODO
-* syntax support for runresult
+Run a custom command in vim with current buffer and see the result side-by-side
 
 ## Usage
 
@@ -48,4 +49,3 @@ Toggle command autorun on save of current file:
 ``` vim
 :AutoRun
 ```
-
