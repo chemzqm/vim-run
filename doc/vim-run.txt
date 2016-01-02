@@ -86,7 +86,7 @@ COMMANDS 				*vim-run-commands*
 <
 	will run visual selected lines through the {command}
 
-:AutoRun [{command}]				*:auto-run*
+:AutoRun [{command}]				*:AutoRun*
 
 	Toggle autorun config for the current buffer, if it's on, {command}
 	or last used {command} by |:Run| would be used as command to run the
