@@ -38,7 +38,6 @@ endfunction
 
 function! s:Execute(command, ...)
   let cmd = s:GetCommand(a:command)
-  let g:cmd = cmd
   if cmd == -1 | return | endif
   for i in range(1, winnr('$'))
     if bufname(winbufnr(i)) =~# '^__run__'
@@ -65,7 +64,7 @@ function! s:Execute(command, ...)
     call append(1, list[1:])
   endif
   silent! execute '%s///'
-  "execute 'wincmd p'
+  execute 'wincmd p'
   if !has('gui_running')
     redraw
   endif
