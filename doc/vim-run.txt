@@ -65,13 +65,12 @@ INTERFACE				*vim-run-interface*
 ------------------------------------------------------------------------------
 COMMANDS 				*vim-run-commands*
 
-:Run [{command}]				*:Run*
+:[{range}]Run [{command}]		*:Run*
 
 	Run current buffer with {command}, {command} is buffer type by default
 	{command} could also be configured by global config variables, see
 	|vim-run-variables|
 
-:[range]Run [{command}]				*:range-Run*
 
 	Run selected range of lines through command, {command} is the same
 	as |:Run|. Range support line range, for example: >
@@ -86,7 +85,7 @@ COMMANDS 				*vim-run-commands*
 <
 	will run visual selected lines through the {command}
 
-:AutoRun [{command}]				*:AutoRun*
+:AutoRun [{command}]			*:AutoRun*
 
 	Toggle autorun config for the current buffer, if it's on, {command}
 	or last used {command} by |:Run| would be used as command to run the
@@ -106,6 +105,8 @@ certain filetype.
 ==============================================================================
 CHANGELOG				 *vim-run-changelog*
 
+0.2.0	2016-01-19
+	- improve range support
 0.1.0	2016-1-3
 	- init.
 

@@ -29,21 +29,10 @@ function! s:GetCommand(...)
   return cmd
 endfunction
 
-function! s:Run(ranged, l1, l2, command)
-  if a:ranged
-    let lines = getline(a:l1, a:l2)
-    let stdin = join(lines, "\n") . "\n"
-    call s:Execute(a:command, stdin)
-  else
-    call s:Execute(a:command)
-  endif
-endfunction
-
-function! s:RunVisual(command) range
-  let old_z = @z
-  normal! gv"zy
-  call s:Execute(a:command, @z)
-  let @z = old_z
+function! s:Run(l1, l2, command)
+  let lines = getline(a:l1, a:l2)
+  let stdin = join(lines, "\n") . "\n"
+  call s:Execute(a:command, stdin)
 endfunction
 
 function! s:Execute(command, ...)
@@ -73,7 +62,7 @@ function! s:Execute(command, ...)
     call append(1, list[1:])
   endif
   silent! execute '%s///'
-  execute 'wincmd p'
+  "execute 'wincmd p'
   if !has('gui_running')
     redraw
   endif
@@ -108,6 +97,5 @@ augroup autorun
   autocmd BufWritePost * call s:onbufwrite()
 augroup end
 
-command! -nargs=* -complete=shellcmd AutoRun :call s:Autorun(<q-args>)
-command! -nargs=* -complete=shellcmd -range=0 Run       :call s:Run(<count>, <line1>, <line2>, <q-args>)
-command! -nargs=* -complete=shellcmd -range=% RunVisual :call s:RunVisual(<q-args>)
+command! -nargs=* -complete=shellcmd AutoRun      :call s:Autorun(<q-args>)
+command! -nargs=* -complete=shellcmd -range=% Run :call s:Run(<line1>, <line2>, <q-args>)
