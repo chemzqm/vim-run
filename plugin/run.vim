@@ -90,7 +90,7 @@ function! s:onbufwrite()
   if !len(fnames) | return | endif
   let file = fnamemodify(bufname('%'), ':p')
   if get(s:auto_run_dict, file, 0)
-    call s:Run(0, 1, '$', '')
+    call s:Execute('')
   endif
 endfunction
 

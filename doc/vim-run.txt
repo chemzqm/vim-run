@@ -7,7 +7,7 @@
           `--'   `--'`--`--`--'       `--'    `----' `--''--'~
 
 Author  : Qiming Zhao <chemzqm@gmail.com>
-Version : 0.1.0
+Version : 0.2.0
 License : MIT license {{{
 
   Copyright (c) 2016 chemzqm@gmail.com
@@ -91,6 +91,9 @@ COMMANDS 				*vim-run-commands*
 	or last used {command} by |:Run| would be used as command to run the
 	file automatially on file save.
 
+	Note: |:Run| command using stdin as input source, but |:AutoRun| using
+	buffername as argument append to the {commmand}
+
 
 ------------------------------------------------------------------------------
 *VARIABLES*				*vim-run-variables*
@@ -107,6 +110,8 @@ CHANGELOG				 *vim-run-changelog*
 
 0.2.0	2016-01-19
 	- improve range support
+	- make AutoRun use current file
+	
 0.1.0	2016-1-3
 	- init.
 
