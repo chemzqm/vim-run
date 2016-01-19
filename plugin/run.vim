@@ -2,8 +2,8 @@
 " Description: Run command on current file and get result side by side
 " Author: Qiming Zhao <chemzqm@gmail.com>
 " Licence: Vim licence
-" Version: 0.1
-" Last Modified:  December 30, 2015
+" Version: 0.2
+" Last Modified:  2016-01-19
 " ============================================================================
 
 if exists('did_vim_run_loaded') || v:version < 700
@@ -20,11 +20,12 @@ function! s:GetCommand(...)
     let cmd = b:vim_run_cmd
   elseif exists('g:vim_run_command_map')
     let cmd = get(g:vim_run_command_map, &ft, '')
-  elseif executable(&ft)
+  elseif executable(&filetype)
     let cmd = &filetype
-  else
+  endif
+  if empty(cmd)
     echohl Error | echon 'Command not find for current buffer' | echohl None
-    return
+    return -1
   endif
   return cmd
 endfunction
@@ -37,6 +38,8 @@ endfunction
 
 function! s:Execute(command, ...)
   let cmd = s:GetCommand(a:command)
+  let g:cmd = cmd
+  if cmd == -1 | return | endif
   for i in range(1, winnr('$'))
     if bufname(winbufnr(i)) =~# '^__run__'
       let wnr = i
