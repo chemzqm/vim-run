@@ -6,11 +6,11 @@
 " Last Modified:  2016-01-19
 " ============================================================================
 
-if exists('did_vim_run_loaded') || v:version < 700
+if exists('g:did_vim_run_loaded') || v:version < 700
   finish
 endif
 
-let did_vim_run_loaded = 1
+let g:did_vim_run_loaded = 1
 
 function! s:GetCommand(...)
   if a:0 && len(a:1)
